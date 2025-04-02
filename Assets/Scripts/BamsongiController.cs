@@ -17,6 +17,7 @@ public class BamsongiController : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<ParticleSystem>().Play();
 
         if (other.gameObject.tag == "Target")
         {

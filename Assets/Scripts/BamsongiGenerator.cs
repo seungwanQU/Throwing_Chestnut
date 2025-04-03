@@ -25,9 +25,9 @@ public class BamsongiGenerator : MonoBehaviour
         }
     }
 
-    public void ScorePlus()
+    public void ScorePlus(int n)
     {
-        score += 10;
-        this.ScoreText.GetComponent<TextMeshProUGUI>().text = "Score:" + score.ToString();
+        score += n;
+        this.ScoreText.GetComponent<TextMeshProUGUI>().text = "Score:" + score;
     }
 }

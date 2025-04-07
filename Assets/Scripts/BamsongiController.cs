@@ -27,11 +27,12 @@ public class BamsongiController : MonoBehaviour
         float d = (p1 - p2).magnitude;         // 벡터의 길이 반환
         int n = Mathf.CeilToInt(10 - d * 5);   // 올림 처리
 
-        if (other.gameObject.tag == "Target")
+        if (other.gameObject.tag == "Monster")
         {
             this.BamsongiGenerator.GetComponent<BamsongiGenerator>().ScorePlus(n);
+            Destroy(gameObject);
         }
-        else if (other.gameObject.tag == "Terrain")
+        else
         {
             Destroy(gameObject);
         }

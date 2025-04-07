@@ -22,6 +22,9 @@ public class BamsongiGenerator : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 worldDirection = ray.direction;
             bamsongi.GetComponent<BamsongiController>().Shoot(worldDirection.normalized * 2000);
+
+            Vector3 spawnPosition = Camera.main.transform.position;  // 카메라의 위치를 가져옴
+            bamsongi.transform.position = spawnPosition;             // 밤송이의 위치를 카메라의 위치로 설정
         }
     }
 

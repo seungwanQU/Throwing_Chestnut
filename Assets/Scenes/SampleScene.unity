@@ -655,7 +655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 894187022}
   m_Layer: 0
-  m_Name: Distance
+  m_Name: HeadPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 public class BamsongiController : MonoBehaviour
 {
     public GameObject BamsongiGenerator;
-    public GameObject Distance;
+    public GameObject HeadPoint;
 
     public void Shoot(Vector3 direction)
     {
@@ -13,7 +13,7 @@ public class BamsongiController : MonoBehaviour
     void Start()
     {
         this.BamsongiGenerator = GameObject.Find("BamsongiGenerator");
-        this.Distance = GameObject.Find("Distance");
+        this.HeadPoint = GameObject.Find("HeadPoint");
     }
 
     void OnCollisionEnter(Collision other)
@@ -21,11 +21,16 @@ public class BamsongiController : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<ParticleSystem>().Play();
 
-        Vector2 p1 = this.transform.position;
-        Vector2 p2 = this.Distance.transform.position;
+        Vector3 p1 = this.transform.position;
+        Vector3 p2 = this.HeadPoint.transform.position;
 
         float d = (p1 - p2).magnitude;         // 벡터의 길이 반환
         int n = Mathf.CeilToInt(10 - d * 5);   // 올림 처리
+
+        if (n <= 0)
+        {
+            n = Random.Range(1, 3);
+        }
 
         if (other.gameObject.tag == "Monster")
         {

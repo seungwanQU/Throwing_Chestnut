@@ -4,7 +4,7 @@ public class BamsongiController : MonoBehaviour
 {
     public GameObject BamsongiGenerator;
     public GameObject HeadPoint;
-    public GameObject HPBarController;
+    public GameObject MonsterController;
 
     public void Shoot(Vector3 direction)
     {
@@ -15,7 +15,7 @@ public class BamsongiController : MonoBehaviour
     {
         this.BamsongiGenerator = GameObject.Find("BamsongiGenerator");
         this.HeadPoint = GameObject.Find("HeadPoint");
-        this.HPBarController = GameObject.Find("HPBarController");
+        this.MonsterController = GameObject.Find("MonsterController");
     }
 
     void OnCollisionEnter(Collision other)
@@ -36,7 +36,7 @@ public class BamsongiController : MonoBehaviour
 
         if (other.gameObject.tag == "Monster")
         {
-            HPBarController.GetComponent<HPBar>().Damage(n);
+            MonsterController.GetComponent<MonsterController>().TakeDamage(n);
             Destroy(gameObject);
         }
         else

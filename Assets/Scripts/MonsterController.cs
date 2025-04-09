@@ -8,7 +8,7 @@ public class MonsterController : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth = 100f;
-    public float delay = 3f;   // 몬스터 destroy 후 대기 시간
+    public float delay = 1f;   // 몬스터 destroy 후 대기 시간
 
     public Slider healthSlider;
     public Slider healthSliderCopy;
@@ -16,8 +16,7 @@ public class MonsterController : MonoBehaviour
     public TextMeshProUGUI textHPCopy;
 
     public GameObject monsterPosition;
-    public GameObject currentMonsterPrefab;
-    public GameObject nextMonsterPrefab;
+    public List<GameObject> monsterPrefabs = new List<GameObject>();
 
     private Animator animator;
 
@@ -31,9 +30,14 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        animator = currentMonsterPrefab.activeSelf == true
-                 ? currentMonsterPrefab.GetComponent<Animator>()
-                 : nextMonsterPrefab.GetComponent<Animator>();
+        foreach (var monster in monsterPrefabs)
+        {
+            if (monster.activeSelf == true)
+            {
+                animator = monster.GetComponent<Animator>();
+                break;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -54,19 +58,25 @@ public class MonsterController : MonoBehaviour
 
     private void SpawnNextMonster()
     {
-        if (nextMonsterPrefab.activeSelf == false)
+        for (int i = 0; i < monsterPrefabs.Count; i++)
         {
-            // Instantiate(nextMonsterPrefab, monsterPosition.transform.position, monsterPosition.transform.rotation);
-            nextMonsterPrefab.SetActive(true);
-            this.GetComponent<MonsterController>().healthSlider = this.healthSliderCopy;
-            this.GetComponent<MonsterController>().textHP = this.textHPCopy;
-            this.GetComponent<MonsterController>().maxHealth = this.maxHealth;
-            this.GetComponent<MonsterController>().currentHealth = this.currentHealth;
-            this.GetComponent<MonsterController>().UpdateHealthSlider();
-            this.GetComponent<MonsterController>().IncreaseHealth();
-        }
+            if (monsterPrefabs[i].activeSelf == true)
+            {
+                monsterPrefabs[i].SetActive(false);
 
-        currentMonsterPrefab.SetActive(false);
+                if (i + 1 < monsterPrefabs.Count)
+                {
+                    monsterPrefabs[i + 1].SetActive(true);
+
+                    this.healthSlider = this.healthSliderCopy;
+                    this.textHP = this.textHPCopy;
+
+                    UpdateHealthSlider();
+                    IncreaseHealth();
+                }
+                break;
+            }
+        }
     }
 
     public void UpdateHealthSlider()

@@ -387,7 +387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: -320}
+  m_AnchoredPosition: {x: -530, y: 180}
   m_SizeDelta: {x: 390, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &298714238
@@ -721,7 +721,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -40, y: 250}
-  m_SizeDelta: {x: 1000, y: 80}
+  m_SizeDelta: {x: 1400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &361847942
 MonoBehaviour:
@@ -1476,6 +1476,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   delay: 3
+  attackInterval: 5
   healthSlider: {fileID: 361847942}
   healthSliderCopy: {fileID: 0}
   StageBar: {fileID: 298714238}

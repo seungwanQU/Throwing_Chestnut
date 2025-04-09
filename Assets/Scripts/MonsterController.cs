@@ -10,6 +10,8 @@ public class MonsterController : MonoBehaviour
     public float currentHealth = 100f;
     public float delay = 1f;   // 몬스터 destroy 후 대기 시간
 
+    public float attackInterval = 5f;
+
     public Slider healthSlider;
     public Slider healthSliderCopy;
     public Slider StageBar;
@@ -29,6 +31,8 @@ public class MonsterController : MonoBehaviour
         textHPCopy = this.textHP;
 
         UpdateHealthSlider();
+
+        InvokeRepeating("MonsterAttack", attackInterval, attackInterval);
     }
 
     void Update()
@@ -41,6 +45,11 @@ public class MonsterController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void MonsterAttack()
+    {
+        animator.SetTrigger("Attack");
     }
 
     public void TakeDamage(int damage)

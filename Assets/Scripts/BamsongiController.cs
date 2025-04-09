@@ -3,8 +3,10 @@ using UnityEngine;
 public class BamsongiController : MonoBehaviour
 {
     public GameObject BamsongiGenerator;
-    public GameObject HeadPoint;
     public GameObject MonsterController;
+    public GameObject HeadPoint;
+
+    public float delay = 0.5f;
 
     public void Shoot(Vector3 direction)
     {
@@ -14,8 +16,8 @@ public class BamsongiController : MonoBehaviour
     void Start()
     {
         this.BamsongiGenerator = GameObject.Find("BamsongiGenerator");
-        this.HeadPoint = GameObject.Find("HeadPoint");
         this.MonsterController = GameObject.Find("MonsterController");
+        this.HeadPoint = GameObject.Find("HeadPoint");
     }
 
     void OnCollisionEnter(Collision other)
@@ -37,11 +39,16 @@ public class BamsongiController : MonoBehaviour
         if (other.gameObject.tag == "Monster")
         {
             MonsterController.GetComponent<MonsterController>().TakeDamage(n);
-            Destroy(gameObject);
+            Invoke("DestroyWeapon", delay);
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void DestroyWeapon()
+    {
+        Destroy(gameObject);
     }
 }

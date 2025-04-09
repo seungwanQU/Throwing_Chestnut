@@ -41,21 +41,26 @@ public class MonsterController : MonoBehaviour
 
             animator.SetBool("Death", true);
 
-            Invoke("DestroyMonster", delay);
-
-            if (nextMonsterPrefab != null)
-            {
-                Instantiate(nextMonsterPrefab, monsterPosition.transform.position, monsterPosition.transform.rotation);
-                this.GetComponent<MonsterController>().healthSlider = this.healthSliderCopy;
-                this.GetComponent<MonsterController>().textHP = this.textHPCopy;
-                this.GetComponent<MonsterController>().maxHealth = this.maxHealth;
-                this.GetComponent<MonsterController>().currentHealth = this.currentHealth;
-                this.GetComponent<MonsterController>().UpdateHealthSlider();
-                this.GetComponent<MonsterController>().IncreaseHealth();
-            }
+            Invoke("SpawnNextMonster", delay);
         }
 
         UpdateHealthSlider();
+    }
+
+    private void SpawnNextMonster()
+    {
+        if (nextMonsterPrefab != null)
+        {
+            Instantiate(nextMonsterPrefab, monsterPosition.transform.position, monsterPosition.transform.rotation);
+            this.GetComponent<MonsterController>().healthSlider = this.healthSliderCopy;
+            this.GetComponent<MonsterController>().textHP = this.textHPCopy;
+            this.GetComponent<MonsterController>().maxHealth = this.maxHealth;
+            this.GetComponent<MonsterController>().currentHealth = this.currentHealth;
+            this.GetComponent<MonsterController>().UpdateHealthSlider();
+            this.GetComponent<MonsterController>().IncreaseHealth();
+        }
+
+        Destroy(currentMonsterPrefab);
     }
 
     public void UpdateHealthSlider()
@@ -75,10 +80,5 @@ public class MonsterController : MonoBehaviour
             currentHealth = maxHealth;
             UpdateHealthSlider();
         }
-    }
-
-    private void DestroyMonster()
-    {
-        Destroy(currentMonsterPrefab);
     }
 }

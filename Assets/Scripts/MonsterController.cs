@@ -12,6 +12,8 @@ public class MonsterController : MonoBehaviour
 
     public Slider healthSlider;
     public Slider healthSliderCopy;
+    public Slider StageBar;
+    public Slider StageBarCopy;
     public TextMeshProUGUI textHP;
     public TextMeshProUGUI textHPCopy;
 
@@ -23,6 +25,7 @@ public class MonsterController : MonoBehaviour
     void Start()
     {
         healthSliderCopy = this.healthSlider;
+        StageBarCopy = this.StageBar;
         textHPCopy = this.textHP;
 
         UpdateHealthSlider();
@@ -69,6 +72,7 @@ public class MonsterController : MonoBehaviour
                     monsterPrefabs[i + 1].SetActive(true);
 
                     this.healthSlider = this.healthSliderCopy;
+                    this.StageBar = this.StageBarCopy;
                     this.textHP = this.textHPCopy;
 
                     UpdateHealthSlider();
@@ -76,6 +80,12 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             }
+        }
+
+        StageBar.value += 0.33f;
+        if (StageBarCopy.value >= 1f)
+        {
+            StageBarCopy.value = 0f;
         }
     }
 

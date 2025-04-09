@@ -33,7 +33,7 @@ public class BamsongiController : MonoBehaviour
 
         if (n <= 0)
         {
-            n = Random.Range(1, 3);
+            n = Random.Range(5, 10);
         }
 
         if (other.gameObject.tag == "Monster")

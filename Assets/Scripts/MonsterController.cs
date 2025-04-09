@@ -23,12 +23,17 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        animator = currentMonsterPrefab.GetComponent<Animator>();
-
         healthSliderCopy = this.healthSlider;
         textHPCopy = this.textHP;
 
         UpdateHealthSlider();
+    }
+
+    void Update()
+    {
+        animator = currentMonsterPrefab.activeSelf == true
+                 ? currentMonsterPrefab.GetComponent<Animator>()
+                 : nextMonsterPrefab.GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
@@ -49,9 +54,10 @@ public class MonsterController : MonoBehaviour
 
     private void SpawnNextMonster()
     {
-        if (nextMonsterPrefab != null)
+        if (nextMonsterPrefab.activeSelf == false)
         {
-            Instantiate(nextMonsterPrefab, monsterPosition.transform.position, monsterPosition.transform.rotation);
+            // Instantiate(nextMonsterPrefab, monsterPosition.transform.position, monsterPosition.transform.rotation);
+            nextMonsterPrefab.SetActive(true);
             this.GetComponent<MonsterController>().healthSlider = this.healthSliderCopy;
             this.GetComponent<MonsterController>().textHP = this.textHPCopy;
             this.GetComponent<MonsterController>().maxHealth = this.maxHealth;
@@ -60,7 +66,7 @@ public class MonsterController : MonoBehaviour
             this.GetComponent<MonsterController>().IncreaseHealth();
         }
 
-        Destroy(currentMonsterPrefab);
+        currentMonsterPrefab.SetActive(false);
     }
 
     public void UpdateHealthSlider()

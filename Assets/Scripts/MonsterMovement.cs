@@ -1,20 +1,17 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MonsterMovement : MonoBehaviour
 {
-    public NavMeshAgent navMeshAgent;
+    public List<GameObject> monsterPrefabs = new List<GameObject>();
+    private NavMeshAgent navMeshAgent;
 
     private bool isMoving = false;
 
     [SerializeField] private float minMoveDelay = 1f; // 최소 이동 딜레이
     [SerializeField] private float maxMoveDelay = 3f; // 최대 이동 딜레이
-
-    private void Awake()
-    {
-        navMeshAgent = navMeshAgent.GetComponent<NavMeshAgent>();
-    }
 
     private void Start()
     {
@@ -55,9 +52,17 @@ public class MonsterMovement : MonoBehaviour
 
     private void Update()
     {
+        foreach (var monster in monsterPrefabs)
+        {
+            if (monster.activeSelf == true)
+            {
+                navMeshAgent = monster.GetComponent<NavMeshAgent>();
+            }
+        }
+
         if (isMoving && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            // 이동이 완료되었을 때 이동 상태를 해제합니다.
+            // 이동이 완료되었을 때 이동 상태 해제
             isMoving = false;
         }
     }

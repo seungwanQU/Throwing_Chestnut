@@ -17,7 +17,6 @@ public class MonsterController : MonoBehaviour
     public Slider StageBar;
     public TextMeshProUGUI textHP;
 
-    public GameObject monsterPosition;
     public List<GameObject> monsterPrefabs = new List<GameObject>();
 
     private Animator animator;

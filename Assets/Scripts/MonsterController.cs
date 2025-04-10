@@ -8,16 +8,14 @@ public class MonsterController : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth = 100f;
-    public float delay = 1f;   // 몬스터 destroy 후 대기 시간
+    public float delay = 3f;   // 몬스터 destroy 후 대기 시간
 
+    public float MonsterPower = 5f;
     public float attackInterval = 5f;
 
     public Slider healthSlider;
-    public Slider healthSliderCopy;
     public Slider StageBar;
-    public Slider StageBarCopy;
     public TextMeshProUGUI textHP;
-    public TextMeshProUGUI textHPCopy;
 
     public GameObject monsterPosition;
     public List<GameObject> monsterPrefabs = new List<GameObject>();
@@ -26,10 +24,6 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        healthSliderCopy = this.healthSlider;
-        StageBarCopy = this.StageBar;
-        textHPCopy = this.textHP;
-
         UpdateHealthSlider();
 
         InvokeRepeating("MonsterAttack", attackInterval, attackInterval);
@@ -49,6 +43,14 @@ public class MonsterController : MonoBehaviour
 
     public void MonsterAttack()
     {
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+
+        if (playerController && currentHealth != 0)
+        {
+            animator.SetTrigger("Attack");
+            playerController.TakeDamage(MonsterPower);
+        }
+
         animator.SetTrigger("Attack");
     }
 
@@ -59,6 +61,7 @@ public class MonsterController : MonoBehaviour
         if (currentHealth <= 0f)
         {
             currentHealth = maxHealth;
+            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
             animator.SetBool("Death", true);
 
@@ -80,9 +83,7 @@ public class MonsterController : MonoBehaviour
                 {
                     monsterPrefabs[i + 1].SetActive(true);
 
-                    this.healthSlider = this.healthSliderCopy;
-                    this.StageBar = this.StageBarCopy;
-                    this.textHP = this.textHPCopy;
+                    this.MonsterPower += 5f;
 
                     UpdateHealthSlider();
                     IncreaseHealth();
@@ -91,11 +92,7 @@ public class MonsterController : MonoBehaviour
             }
         }
 
-        StageBar.value += 0.33f;
-        if (StageBarCopy.value >= 1f)
-        {
-            StageBarCopy.value = 0f;
-        }
+        StageBar.value += 0.35f;
     }
 
     public void UpdateHealthSlider()

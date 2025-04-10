@@ -19,12 +19,17 @@ public class MonsterController : MonoBehaviour
 
     public List<GameObject> monsterPrefabs = new List<GameObject>();
 
+    private PlayerController playerController;
+    private MonsterMovement monsterMovement;
+
     private Animator animator;
 
     void Start()
     {
-        UpdateHealthSlider();
+        playerController = FindFirstObjectByType<PlayerController>();
+        monsterMovement = this.GetComponent<MonsterMovement>();
 
+        UpdateHealthSlider();
         InvokeRepeating("MonsterAttack", attackInterval, attackInterval);
     }
 
@@ -42,13 +47,16 @@ public class MonsterController : MonoBehaviour
 
     public void MonsterAttack()
     {
-        PlayerController playerController = FindFirstObjectByType<PlayerController>();
-
         if (playerController && currentHealth != 0)
         {
             if (animator.GetBool("Move") == true)
             {
                 animator.SetBool("Move", false);
+            }
+
+            if (monsterMovement.isMoving == true)
+            {
+                monsterMovement.isMoving = false;
             }
 
             animator.SetTrigger("Attack");
@@ -70,6 +78,11 @@ public class MonsterController : MonoBehaviour
             if (animator.GetBool("Move") == true)
             {
                 animator.SetBool("Move", false);
+            }
+
+            if (monsterMovement.isMoving == true)
+            {
+                monsterMovement.isMoving = false;
             }
 
             animator.SetBool("Death", true);

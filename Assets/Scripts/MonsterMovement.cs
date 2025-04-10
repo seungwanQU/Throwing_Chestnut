@@ -9,7 +9,7 @@ public class MonsterMovement : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
-    private bool isMoving = false;
+    public bool isMoving = false;
 
     [SerializeField] private float minMoveDelay = 1f; // 최소 이동 딜레이
     [SerializeField] private float maxMoveDelay = 3f; // 최대 이동 딜레이

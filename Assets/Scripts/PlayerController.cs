@@ -31,9 +31,13 @@ public class PlayerController : MonoBehaviour
     private float PlayerMaxHealth = 100f;     // 최대 체력
     private float PlayerCurrentHealth = 100f; // 현재 체력
 
+    private GameOverUI gameOverUI;
+
     void Start()
     {
         PlayerhealthSlider = PlayerhealthSlider.GetComponent<Slider>();
+        gameOverUI = this.GetComponent<GameOverUI>();
+
         UpdateHealthSlider();
     }
 
@@ -46,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         if (PlayerCurrentHealth <= 0f)
         {
-            // 플레이어가 사망한 경우 처리할 내용 추가
+            gameOverUI.GameOverFadeIn();
         }
     }
 

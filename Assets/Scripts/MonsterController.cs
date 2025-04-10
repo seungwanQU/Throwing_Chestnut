@@ -46,6 +46,11 @@ public class MonsterController : MonoBehaviour
 
         if (playerController && currentHealth != 0)
         {
+            if (animator.GetBool("Move") == true)
+            {
+                animator.SetBool("Move", false);
+            }
+
             animator.SetTrigger("Attack");
             playerController.TakeDamage(MonsterPower);
         }
@@ -62,8 +67,12 @@ public class MonsterController : MonoBehaviour
             currentHealth = maxHealth;
             currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
-            animator.SetBool("Death", true);
+            if (animator.GetBool("Move") == true)
+            {
+                animator.SetBool("Move", false);
+            }
 
+            animator.SetBool("Death", true);
             Invoke("SpawnNextMonster", delay);
         }
 

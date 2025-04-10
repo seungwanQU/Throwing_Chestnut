@@ -7,6 +7,7 @@ public class MonsterMovement : MonoBehaviour
 {
     public List<GameObject> monsterPrefabs = new List<GameObject>();
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
 
     private bool isMoving = false;
 
@@ -47,6 +48,7 @@ public class MonsterMovement : MonoBehaviour
     private void MoveTo(Vector3 targetPosition)
     {
         isMoving = true;
+        animator.SetBool("Move", true);
         navMeshAgent.SetDestination(targetPosition);
     }
 
@@ -56,6 +58,7 @@ public class MonsterMovement : MonoBehaviour
         {
             if (monster.activeSelf == true)
             {
+                animator = monster.GetComponent<Animator>();
                 navMeshAgent = monster.GetComponent<NavMeshAgent>();
             }
         }
@@ -64,6 +67,7 @@ public class MonsterMovement : MonoBehaviour
         {
             // 이동이 완료되었을 때 이동 상태 해제
             isMoving = false;
+            animator.SetBool("Move", false);
         }
     }
 }

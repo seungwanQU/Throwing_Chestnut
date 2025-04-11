@@ -41,7 +41,7 @@ public class MonsterMovement : MonoBehaviour
     private Vector3 GetRandomTargetPosition()
     {
         // 랜덤한 위치를 선택하여 반환합니다.
-        Vector3 randomPosition = new Vector3(Random.Range(555f, 585f), 0f, Random.Range(335f, 375f));
+        Vector3 randomPosition = new Vector3(Random.Range(560f, 570f), 0f, Random.Range(350f, 360f));
         return randomPosition;
     }
 

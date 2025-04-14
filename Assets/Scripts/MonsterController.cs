@@ -55,6 +55,7 @@ public class MonsterController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        animator.SetTrigger("GetHit");
 
         if (currentHealth <= 0f)
         {

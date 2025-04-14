@@ -7,8 +7,6 @@ public class MonsterMovement : MonoBehaviour
 {
     public List<GameObject> monsterPrefabs = new List<GameObject>();
 
-    private MonsterController monsterController;
-
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
@@ -19,8 +17,6 @@ public class MonsterMovement : MonoBehaviour
 
     private void Start()
     {
-        monsterController = this.GetComponent<MonsterController>();
-
         // 처음에 이동을 시작하도록 호출
         StartCoroutine(MoveCoroutine());
     }

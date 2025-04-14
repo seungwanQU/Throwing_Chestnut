@@ -38,7 +38,11 @@ public class BamsongiController : MonoBehaviour
 
         if (other.gameObject.tag == "Monster")
         {
-            MonsterController.GetComponent<MonsterController>().TakeDamage(n);
+            if (this.MonsterController.GetComponent<MonsterController>().currentHealth > 0)
+            {
+                MonsterController.GetComponent<MonsterController>().TakeDamage(n);
+            }
+
             Invoke("DestroyWeapon", delay);
         }
         else

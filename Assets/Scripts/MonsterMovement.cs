@@ -6,6 +6,9 @@ using System.Collections.Generic;
 public class MonsterMovement : MonoBehaviour
 {
     public List<GameObject> monsterPrefabs = new List<GameObject>();
+
+    private MonsterController monsterController;
+
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
@@ -16,6 +19,8 @@ public class MonsterMovement : MonoBehaviour
 
     private void Start()
     {
+        monsterController = this.GetComponent<MonsterController>();
+
         // 처음에 이동을 시작하도록 호출
         StartCoroutine(MoveCoroutine());
     }
@@ -61,6 +66,15 @@ public class MonsterMovement : MonoBehaviour
                 animator = monster.GetComponent<Animator>();
                 navMeshAgent = monster.GetComponent<NavMeshAgent>();
             }
+        }
+
+        if (isMoving && animator.GetBool("Death") == true)
+        {
+            // 몬스터가 죽었을 때 이동 상태 해제
+            isMoving = false;
+            animator.SetBool("Move", false);
+            navMeshAgent.isStopped = true;
+            return;
         }
 
         if (isMoving && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)

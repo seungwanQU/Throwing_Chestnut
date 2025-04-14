@@ -48,7 +48,7 @@ public class MonsterController : MonoBehaviour
         if (playerController && currentHealth != 0)
         {
             animator.SetTrigger("Attack");
-            playerController.TakeDamage(MonsterPower);
+            StartCoroutine(playerController.TakeDamage(MonsterPower));
         }
     }
 

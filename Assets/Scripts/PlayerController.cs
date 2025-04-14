@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,8 +42,10 @@ public class PlayerController : MonoBehaviour
         UpdateHealthSlider();
     }
 
-    public void TakeDamage(float monsterPower)
+    public IEnumerator TakeDamage(float monsterPower)
     {
+        yield return new WaitForSeconds(2f); // 대기 시간
+
         PlayerCurrentHealth -= monsterPower;
         PlayerCurrentHealth = Mathf.Clamp(PlayerCurrentHealth, 0f, PlayerMaxHealth); // 체력이 음수가 되지 않도록 클램핑
 

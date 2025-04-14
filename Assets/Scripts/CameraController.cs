@@ -13,9 +13,9 @@ public class CameraController : MonoBehaviour
     // public KeyCode rightKey = KeyCode.D;
 
     [SerializeField]
-    float _inputSpeed = 0.1f;
+    float _rotateSpeed = 0.01f;
     [SerializeField]
-    float totalRun = 1.0f;
+    float _inputSpeed = 0.1f;
 
     private void Update()
     {
@@ -41,7 +41,20 @@ public class CameraController : MonoBehaviour
         //     cameraPrefab.LookAt(activeMonster.transform);
         // }
 
+        CameraRotate();
         CameraInput();
+    }
+
+    void CameraRotate()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            float x = Input.GetAxis("Mouse X");
+            float y = Input.GetAxis("Mouse Y");
+            Vector3 rotateValue = new Vector3(y, x * -1, 0);
+            cameraPrefab.transform.eulerAngles = cameraPrefab.transform.eulerAngles - rotateValue;
+            cameraPrefab.transform.eulerAngles += rotateValue * _rotateSpeed;
+        }
     }
 
     private void CameraInput()
@@ -70,6 +83,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 p = p_Velocity;
 
+        float totalRun = 1.0f;
         if (p.sqrMagnitude > 0)
         {
             totalRun += Time.deltaTime;

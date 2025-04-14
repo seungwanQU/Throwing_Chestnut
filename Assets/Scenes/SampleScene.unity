@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPrefab: {fileID: 330585546}
+  _rotateSpeed: 0.01
   _inputSpeed: 0.1
 --- !u!1 &136544642
 GameObject:

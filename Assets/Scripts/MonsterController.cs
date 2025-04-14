@@ -97,12 +97,12 @@ public class MonsterController : MonoBehaviour
         float decreaseHp = (float)currentHealth / (float)maxHealth;
 
         healthSlider.value = decreaseHp;
-        textHP.text = $"{currentHealth} / {maxHealth}";
+        textHP.text = $"{Mathf.Round(currentHealth)} / {Mathf.Round(maxHealth)}";
     }
 
     public void IncreaseHealth()
     {
-        maxHealth = maxHealth * 1.2f;
+        maxHealth = maxHealth * 1.5f;
 
         if (currentHealth != maxHealth)
         {

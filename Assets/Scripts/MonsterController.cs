@@ -50,8 +50,6 @@ public class MonsterController : MonoBehaviour
             animator.SetTrigger("Attack");
             playerController.TakeDamage(MonsterPower);
         }
-
-        animator.SetTrigger("Attack");
     }
 
     public void TakeDamage(int damage)

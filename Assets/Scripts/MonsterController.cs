@@ -104,7 +104,7 @@ public class MonsterController : MonoBehaviour
 
     public void IncreaseHealth()
     {
-        maxHealth = maxHealth * 2.0f;
+        maxHealth = maxHealth * 1.2f;
 
         if (currentHealth != maxHealth)
         {

@@ -164,11 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPrefab: {fileID: 330585546}
-  angle: 0
-  radius: 20
-  speed: 20
-  leftKey: 97
-  rightKey: 100
+  _inputSpeed: 0.1
 --- !u!1 &136544642
 GameObject:
   m_ObjectHideFlags: 0
